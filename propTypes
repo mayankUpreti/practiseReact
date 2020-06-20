@@ -1,0 +1,52 @@
+import React, { Children } from "react";
+import "./styles.css";
+import PropTypes from "prop-types";
+export default function App() {
+  return (
+    <div className="App">
+      <Test
+        name={"mayank"}
+        toggle={true}
+        strOrNum={10}
+        ary={[6, 4, 3, 5]}
+        aryOfObj={[
+          { name: "mana", class: "nabva" },
+          { name: "shan", class: "bjxsb" },
+          { name: "jsk", class: "djbcdsj" }
+        ]}
+      >Children</Test>
+    </div>
+  );
+}
+
+const Test = props => {
+  return (
+    <div>
+      <h1>{props.name}</h1>
+      <h1>{props.toggle ? "upreti" : "shyam"}</h1>
+      <h1>{props.strOrNum}</h1>
+      {props.ary.map(el => (
+        <li>{el}</li>
+      ))}
+
+      {props.aryOfObj.map(el => (
+        <li key={el.class}>{el.name}</li>
+      ))}
+      <div>{props.children}</div>
+    </div>
+  );
+};
+Test.propTypes = {
+  name: PropTypes.string,
+  toggle: PropTypes.boolean,
+  strOrNum: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ary: PropTypes.arrayOf(PropTypes.number),
+  aryOfObj: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      class: PropTypes.string
+    })
+  ),
+  children:PropTypes.string //proptype.element if div instead of children
+
+};
